@@ -14,6 +14,13 @@ typedef struct Entity {
   Position pos;
   char ch;
 } Entity;
+extern Entity *player;
+
+typedef struct Tile {
+  char ch;
+  bool walkable;
+} Tile;
+extern Tile **map;
 
 // engine.c functions
 void cursesSetup(void);
@@ -24,6 +31,20 @@ void closeGame(void);
 Entity *createPlayer(Position start_pos);
 void handleInput(int input);
 
-extern Entity *player;
+void movePlayer(Position newPos){};
+
+// map.c functions
+Tile **createMapTiles(void);
+void freeMap(void);
+
+// draw.c functions
+void drawMap(void);
+void drawEntity(Entity *entity);
+void drawEverything(void);
+
+// player.c functions
+
+extern const int MAP_HEIGHT;
+extern const int MAP_WIDTH;
 
 #endif

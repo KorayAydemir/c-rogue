@@ -31,7 +31,7 @@ void closeGame(void);
 Entity *createPlayer(Position start_pos);
 void handleInput(int input);
 
-void movePlayer(Position newPos){};
+void movePlayer(Position newPos);
 
 // map.c functions
 Tile **createMapTiles(void);

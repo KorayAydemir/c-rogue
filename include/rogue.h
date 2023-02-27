@@ -36,6 +36,7 @@ void movePlayer(Position newPos);
 // map.c functions
 Tile **createMapTiles(void);
 void freeMap(void);
+Position setupMap(void);
 
 // draw.c functions
 void drawMap(void);

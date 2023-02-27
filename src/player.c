@@ -29,6 +29,7 @@ void handleInput(int input) {
   default:
     break;
   }
+  movePlayer(newPos);
 }
 
 void movePlayer(Position newPos) {

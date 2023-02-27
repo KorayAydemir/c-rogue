@@ -21,3 +21,14 @@ void freeMap(void) {
   }
   free(map);
 }
+
+Position setupMap(void) {
+  Position start_pos = {10, 50};
+  for (int y = 5; y < 15; y++) {
+    for (int x = 40; x < 60; x++) {
+      map[y][x].ch = '.';
+      map[y][x].walkable = true;
+    }
+  }
+  return start_pos;
+};

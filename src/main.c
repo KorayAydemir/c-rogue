@@ -10,9 +10,9 @@ Tile **map;
 int main(void) {
   cursesSetup();
 
-  Position start_pos = {10, 20};
-  player = createPlayer(start_pos);
   map = createMapTiles();
+  Position start_pos = setupMap();
+  player = createPlayer(start_pos);
 
   gameLoop();
 

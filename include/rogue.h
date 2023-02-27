@@ -15,6 +15,11 @@ typedef struct Entity {
   char ch;
 } Entity;
 
+// engine.c functions
+void cursesSetup(void);
+void gameLoop(void);
+void closeGame(void);
+
 Entity *createPlayer(Position start_pos);
 void handleInput(int input);
 

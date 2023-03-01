@@ -9,11 +9,12 @@ Tile **map;
 
 int main(void) {
   cursesSetup();
+  Position start_pos;
 
   srand(time(NULL));
   map = createMapTiles();
 
-  Position start_pos = setupMap();
+  start_pos = setupMap();
   player = createPlayer(start_pos);
 
   gameLoop();

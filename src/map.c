@@ -24,10 +24,9 @@ void freeMap(void) {
 }
 
 Position setupMap(void) {
-  Position start_pos = {10, 50};
+  Position start_pos;
   // generate random rooms
-  int y, x, height, width;
-  const int MAX_ROOMS = 2;
+  const int MAX_ROOMS = 1;
   const int MIN_ROOMS = 1;
   const int MAX_HEIGHT = 10;
   const int MIN_HEIGHT = 5;
@@ -37,15 +36,24 @@ Position setupMap(void) {
   int n_rooms = (rand() % (MAX_ROOMS - MIN_ROOMS + 1)) + MIN_ROOMS;
 
   for (int i = 0; i < n_rooms; i++) {
+    int y, x, height, width;
     y = (rand() % (MAP_HEIGHT - MAX_HEIGHT)) + 1;
     x = (rand() % (MAP_WIDTH - MAX_WIDTH)) + 1;
     height = (rand() % (MAX_HEIGHT - MIN_HEIGHT)) + MIN_HEIGHT;
     width = (rand() % (MAX_WIDTH - MIN_WIDTH)) + MIN_WIDTH;
     Room room = createRoom(y, x, height, width);
     addRoomToMap(room);
-  }
 
-  return start_pos;
+    if (i == 0) {
+      Position start_pos = {y, x};
+      printf("%d,%d -- ", start_pos.y, start_pos.x); // expected values
+    }
+    printf("%d,%d -- ", start_pos.y, start_pos.x); // unexpected negative values
+  }
+  printf("%d,%d", start_pos.y, start_pos.x); // same values as above
+
+  return start_pos; // returns neither of the above to main. Returns a positive
+                    // number in reasonable range, but still a different number.
 };
 
 Room createRoom(int y, int x, int height, int width) {

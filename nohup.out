@@ -1,0 +1,5 @@
+[059 19:13:41.827824] Failed to enable transparency. This happens when your desktop environment does not support compositing.
+[059 19:20:54.908998] [PARSE ERROR] Unknown char after ESC: 0x6b
+[059 19:20:54.909029] [PARSE ERROR] Unknown char after ESC: 0x5c
+[059 19:20:54.909035] [PARSE ERROR] Unknown char after ESC: 0x6b
+[059 19:20:54.909039] [PARSE ERROR] Unknown char after ESC: 0x5c

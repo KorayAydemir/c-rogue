@@ -10,7 +10,9 @@ Tile **map;
 int main(void) {
   cursesSetup();
 
+  srand(time(NULL));
   map = createMapTiles();
+
   Position start_pos = setupMap();
   player = createPlayer(start_pos);
 

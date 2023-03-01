@@ -3,6 +3,7 @@
 
 #include <ncurses.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct Position {
   int y;
@@ -21,6 +22,13 @@ typedef struct Tile {
   bool walkable;
 } Tile;
 extern Tile **map;
+
+typedef struct Room {
+  int height;
+  int width;
+  Position pos;
+  Position center;
+} Room;
 
 // engine.c functions
 void cursesSetup(void);
@@ -47,5 +55,9 @@ void drawEverything(void);
 
 extern const int MAP_HEIGHT;
 extern const int MAP_WIDTH;
+
+// room.c functions
+Room createRoom(int y, int x, int height, int width);
+void addRoomToMap(Room room);
 
 #endif

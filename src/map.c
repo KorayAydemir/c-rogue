@@ -45,16 +45,14 @@ Position setupMap(void) {
     addRoomToMap(room);
 
     if (i == 0) {
-      Position start_pos = {y, x};
-      printf("%d,%d -- ", start_pos.y, start_pos.x); // expected values
+      start_pos.x = x;
+      start_pos.y = y;
+      printf("%d,%d -- ", start_pos.y, start_pos.x);
     }
-    printf("%d,%d -- ", start_pos.y, start_pos.x); // unexpected negative values
   }
-  printf("%d,%d", start_pos.y, start_pos.x); // same values as above
 
-  return start_pos; // returns neither of the above to main. Returns a positive
-                    // number in reasonable range, but still a different number.
-};
+  return start_pos;
+}
 
 Room createRoom(int y, int x, int height, int width) {
   Room newRoom;

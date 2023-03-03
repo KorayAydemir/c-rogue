@@ -45,6 +45,8 @@ void movePlayer(Position newPos);
 Tile **createMapTiles(void);
 void freeMap(void);
 Position setupMap(void);
+bool roomOverlaps(int y, int x, int height, int width, int roomsCount,
+                  Room rooms[]);
 
 // draw.c functions
 void drawMap(void);
@@ -52,7 +54,6 @@ void drawEntity(Entity *entity);
 void drawEverything(void);
 
 // player.c functions
-
 extern const int MAP_HEIGHT;
 extern const int MAP_WIDTH;
 

@@ -26,8 +26,8 @@ void freeMap(void) {
 Position setupMap(void) {
   Position start_pos;
   // generate random rooms
-  const int MAX_ROOMS = 1;
-  const int MIN_ROOMS = 1;
+  const int MAX_ROOMS = 7;
+  const int MIN_ROOMS = 2;
   const int MAX_HEIGHT = 10;
   const int MIN_HEIGHT = 5;
   const int MAX_WIDTH = 18;
@@ -35,23 +35,42 @@ Position setupMap(void) {
 
   int n_rooms = (rand() % (MAX_ROOMS - MIN_ROOMS + 1)) + MIN_ROOMS;
 
+  Room rooms[n_rooms];
+  int y, x;
+  int rooms_counter;
   for (int i = 0; i < n_rooms; i++) {
-    int y, x, height, width;
+    int height, width;
     y = (rand() % (MAP_HEIGHT - MAX_HEIGHT)) + 1;
     x = (rand() % (MAP_WIDTH - MAX_WIDTH)) + 1;
     height = (rand() % (MAX_HEIGHT - MIN_HEIGHT)) + MIN_HEIGHT;
     width = (rand() % (MAX_WIDTH - MIN_WIDTH)) + MIN_WIDTH;
-    Room room = createRoom(y, x, height, width);
-    addRoomToMap(room);
 
-    if (i == 0) {
-      start_pos.x = x;
-      start_pos.y = y;
-      printf("%d,%d -- ", start_pos.y, start_pos.x);
+    if (!roomOverlaps(y, x, height, width, i, rooms)) {
+      rooms[i] = createRoom(y, x, height, width);
+      addRoomToMap(rooms[i]);
+      rooms_counter++;
     }
   }
+  start_pos.x = rooms[0].center.x;
+  start_pos.y = rooms[0].center.y;
 
   return start_pos;
+}
+
+bool roomOverlaps(int y, int x, int height, int width, int rooms_counter,
+                  Room rooms[]) {
+  for (int i = 0; i < rooms_counter; i++) {
+    if (x >= rooms[i].pos.x + rooms[i].width || rooms[i].pos.x >= x + width) {
+      continue;
+    }
+    if (y + height <= rooms[i].pos.y || rooms[i].pos.y + rooms[i].height <= y) {
+      continue;
+    }
+
+    return true;
+  }
+
+  return false;
 }
 
 Room createRoom(int y, int x, int height, int width) {

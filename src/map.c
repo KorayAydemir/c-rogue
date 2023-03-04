@@ -1,4 +1,5 @@
 #include "../include/rogue.h"
+#include <curses.h>
 #include <stdlib.h>
 
 Tile **createMapTiles(void) {
@@ -9,7 +10,12 @@ Tile **createMapTiles(void) {
 
     for (int x = 0; x < MAP_WIDTH; x++) {
       tiles[y][x].ch = '#';
+      tiles[y][x].color = COLOR_PAIR(VISIBLE_COLOR);
       tiles[y][x].walkable = false;
+
+      tiles[y][x].transparent = false;
+      tiles[y][x].visible = false;
+      tiles[y][x].seen = false;
     }
   }
 
@@ -25,6 +31,7 @@ void freeMap(void) {
 
 Position setupMap(void) {
   Position start_pos;
+
   // generate random rooms
   const int MAX_ROOMS = 10;
   const int MIN_ROOMS = 9;
@@ -80,6 +87,7 @@ void connectRoomCenters(Position centerOne, Position centerTwo) {
 
     map[temp.y][temp.x].ch = '.';
     map[temp.y][temp.x].walkable = true;
+    map[temp.y][temp.x].transparent = true;
   }
 }
 
@@ -117,6 +125,7 @@ void addRoomToMap(Room room) {
     for (int x = room.pos.x; x < room.pos.x + room.width; x++) {
       map[y][x].ch = '.';
       map[y][x].walkable = true;
+      map[y][x].transparent = true;
     }
   }
 }

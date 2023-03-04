@@ -11,15 +11,19 @@ int main(void) {
   cursesSetup();
   Position start_pos;
 
-  srand(time(NULL));
-  map = createMapTiles();
+  bool compatibleTerminal = cursesSetup();
+  if (compatibleTerminal) {
+    srand(time(NULL));
+    map = createMapTiles();
 
-  start_pos = setupMap();
-  player = createPlayer(start_pos);
+    start_pos = setupMap();
+    player = createPlayer(start_pos);
 
-  gameLoop();
-
-  closeGame();
+    gameLoop();
+    closeGame();
+  } else {
+    endwin();
+  }
 
   return 0;
 }

@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+// color pairs
+#define VISIBLE_COLOR 1
+#define SEEN_COLOR 2
+
 typedef struct Position {
   int y;
   int x;
@@ -14,12 +18,17 @@ typedef struct Position {
 typedef struct Entity {
   Position pos;
   char ch;
+  int color;
 } Entity;
 extern Entity *player;
 
 typedef struct Tile {
+  int color;
   char ch;
   bool walkable;
+  bool transparent;
+  bool visible;
+  bool seen;
 } Tile;
 extern Tile **map;
 
@@ -31,7 +40,7 @@ typedef struct Room {
 } Room;
 
 // engine.c functions
-void cursesSetup(void);
+bool cursesSetup(void);
 void gameLoop(void);
 void closeGame(void);
 
@@ -61,5 +70,13 @@ extern const int MAP_WIDTH;
 // room.c functions
 Room createRoom(int y, int x, int height, int width);
 void addRoomToMap(Room room);
+
+// fov.c functions
+bool isInMap(int y, int x);
+void makeFOV(Entity *player);
+void clearFOV(Entity *player);
+int getDistance(Position origin, Position target);
+bool lineOfSight(Position origin, Position target);
+int getSign(int a);
 
 #endif

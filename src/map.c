@@ -49,7 +49,6 @@ Position setupMap(void) {
       rooms[rooms_counter] = createRoom(y, x, height, width);
       addRoomToMap(rooms[rooms_counter]);
       if (rooms_counter > 0) {
-        printf("%d\n", rooms_counter);
         connectRoomCenters(rooms[rooms_counter - 1].center,
                            rooms[rooms_counter].center);
       }

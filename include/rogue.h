@@ -47,6 +47,7 @@ void freeMap(void);
 Position setupMap(void);
 bool roomOverlaps(int y, int x, int height, int width, int roomsCount,
                   Room rooms[]);
+void connectRoomCenters(Position centerOne, Position centerTwo);
 
 // draw.c functions
 void drawMap(void);
